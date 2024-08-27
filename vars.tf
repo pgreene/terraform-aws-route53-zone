@@ -1,6 +1,6 @@
 variable "name" {
   description = "(Required) This is the name of the hosted zone."
-  default = ""
+  default = null
 }
 
 variable "comment" {
