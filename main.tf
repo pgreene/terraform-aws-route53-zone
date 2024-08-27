@@ -1,6 +1,6 @@
 resource "aws_route53_zone" "general" {
   for_each = { for k, v in var.zones : k => v if var.create }
-  name = lookup(each.value, "domain_name", each.key)
+  name = lookup(each.value, "name", each.key)
   comment = lookup(each.value, "comment", null)
   force_destroy = lookup(each.value, "force_destroy", false)
   delegation_set_id = lookup(each.value, "delegation_set_id", null)
