@@ -1,14 +1,14 @@
-output "route53_zone_zone_id" {
+output "zone_id" {
   description = "Zone ID of Route53 zone"
   value = { for k, v in aws_route53_zone.general : k => v.zone_id }
 }
 
-output "route53_zone_zone_arn" {
+output "zone_arn" {
   description = "Zone ARN of Route53 zone"
   value = { for k, v in aws_route53_zone.general : k => v.arn }
 }
 
-output "route53_zone_name_servers" {
+output "name_servers" {
   description = "Name servers of Route53 zone"
   value = { for k, v in aws_route53_zone.general : k => v.name_servers }
 }
@@ -18,7 +18,7 @@ output "primary_name_server" {
   value = { for k, v in aws_route53_zone.general : k => v.primary_name_server }
 }
 
-output "route53_zone_name" {
+output "name" {
   description = "Name of Route53 zone"
   value = { for k, v in aws_route53_zone.general : k => v.name }
 }
