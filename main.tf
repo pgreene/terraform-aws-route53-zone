@@ -1,18 +1,14 @@
 resource "aws_route53_zone" "general" {
-  for_each = { for k, v in var.zones : k => v if var.create }
-  name = lookup(each.value, "name", each.key)
-  comment = lookup(each.value, "comment", null)
-  force_destroy = lookup(each.value, "force_destroy", false)
-  delegation_set_id = lookup(each.value, "delegation_set_id", null)
+  name = var.name
+  comment = var.comment
+  delegation_set_id = var.delegation_set_id
+  force_destroy = var.force_destroy
+  tags = var.tags
   dynamic "vpc" {
-    for_each = try(tolist(lookup(each.value, "vpc", [])), [lookup(each.value, "vpc", {})])
+    for_each = var.vpc == null ? [] : tolist(var.vpc)
     content {
-      vpc_id = vpc.value.vpc_id
-      vpc_region = lookup(vpc.value, "vpc_region", null)
+      vpc_id = var.vpc_id
+      vpc_region = var.vpc_region
     }
   }
-  tags = merge(
-    lookup(each.value, "tags", {}),
-    var.tags
-  )
 }
